@@ -16,6 +16,7 @@ class CreateTournamentsTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('status', ['Open', 'Closed'])->default('Open');
+            $table->timestamp('end_at')->nullable();
             $table->timestamps();
         });
     }

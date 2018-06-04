@@ -19,9 +19,17 @@ Route::group(['middleware' => ['web','auth']], function () {
 
 	Route::get('/', 'HomeController@index')->name('home');
 
-	Route::resource('cups', 'CupController', ['except' => ['delete']]);
-
 	Route::resource('tournaments', 'TournamentController', ['except' => ['delete']]);
+	Route::get('tournaments/{tournament}/cups/create', 'CupController@create')->name('cups.create');
+
+	Route::get('cups/{cup}', 'CupController@show')->name('cups.show');
+	Route::get('cups/{cup}/edit', 'CupController@edit')->name('cups.edit');
+	Route::get('cups/{cup}/races/create', 'RaceController@create')->name('races.create');
+	Route::post('cups/{cup}/participations', 'ParticipationController@store')->name('participations.store');
+	Route::put('participations/{cup}', 'ParticipationController@update')->name('participations.update');
+	Route::get('participations/{participation}', 'ParticipationController@destroy')->name('participations.delete');
+
+	Route::get('races/{race}', 'RaceController@show')->name('races.show');
 
 	Route::resource('users', 'UserController', ['except' => ['delete']]);
 

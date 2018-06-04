@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tournament extends Model
 {
-    protected $table = 'cups';
+    protected $table = 'tournaments';
     protected $fillable = [
         'status'
     ];

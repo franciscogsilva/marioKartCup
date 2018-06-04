@@ -17,32 +17,22 @@
                         </div>
                     @endif                    
                     <div class="row">
-                        <div class="col-md-12"><p class="pull-right"><a type="button" class="btn btn-success" href="{{ route('tournaments.create') }}">Nuevo Torneo</a></p></div>
+                        <div class="col-md-12"><p class="pull-right"><a type="button" class="btn btn-success" href="{{ route('races.create', [$tournament, $cup]) }}">Agregar Jugador a Carrera</a></p></div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <th>#</th>
-                                <th>Ganador</th>
-                                <th>Resultado</th>
+                                <th>Estado</th>
                                 <th>Opciones</th>
                             </thead>
                             <tbody>
-                                @foreach($tournaments as $tournament)
+                                @foreach($cup->races as $race)
                                     <tr>
-                                        <td>{{ $tournament->id }}</td>
+                                        <td>{{ $race->id }}</td>
+                                        <td>{{ $race->status }}</td>
                                         <td>
-                                            <img src="" class="img-responsive img-circle img-karts">
-                                        </td>
-                                        <td>
-                                            <ul class="list-group">
-                                                @foreach($tournament->cups as $cup)
-                                                    {{ dd($cup->participations->groupBy('user_id')) }}
-                                                @endforeach
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('tournaments.show', $tournament->id) }}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button></a>
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

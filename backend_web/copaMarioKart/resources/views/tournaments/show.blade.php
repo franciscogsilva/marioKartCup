@@ -17,7 +17,7 @@
                         </div>
                     @endif                    
                     <div class="row">
-                        <div class="col-md-12"><p class="pull-right"><a type="button" class="btn btn-success" href="{{ route('tournaments.create') }}">Nuevo Torneo</a></p></div>
+                        <div class="col-md-12"><p class="pull-right"><a type="button" class="btn btn-success" href="{{ route('cups.create', $tournament) }}">Agregar Copa a Torneo</a></p></div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -28,21 +28,21 @@
                                 <th>Opciones</th>
                             </thead>
                             <tbody>
-                                @foreach($tournaments as $tournament)
+                                @foreach($tournament->cups->sortByDesc('id') as $cup)
                                     <tr>
-                                        <td>{{ $tournament->id }}</td>
+                                        <td>{{ $cup->id }}</td>
                                         <td>
-                                            <img src="" class="img-responsive img-circle img-karts">
+                                            <img src="{{ $cup->participations->sortBy('position')->first()->user->image }}" class="img-responsive img-circle img-karts" alt="Responsive image">
                                         </td>
                                         <td>
                                             <ul class="list-group">
-                                                @foreach($tournament->cups as $cup)
-                                                    {{ dd($cup->participations->groupBy('user_id')) }}
+                                                @foreach($cup->participations->sortBy('position') as $participation)
+                                                    <li class="list-group-item {{ $participation->position=='1'?'list-group-item-success':'' }} {{ $participation->position=='2'?'list-group-item-info':'' }} {{ $participation->position=='3'?'list-group-item-warning':'' }}">#{{ $participation->position }} {{ $participation->user->name }}= {{ $participation->points }} Puntos</li>
                                                 @endforeach
                                             </ul>
                                         </td>
                                         <td>
-                                            <a href="{{ route('tournaments.show', $tournament->id) }}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button></a>
+                                            <a href="{{ route('cups.show', $cup->id) }}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button></a>
                                         </td>
                                     </tr>
                                 @endforeach

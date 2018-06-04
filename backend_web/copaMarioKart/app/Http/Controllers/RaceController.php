@@ -22,9 +22,14 @@ class RaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Tournament $tournament, Cup $cup)
+    {   
+        $race = new Race();
+        $race->status = 'Open';
+        $race->cup_id = $cup->id;
+        $race->save();
+
+        return redirect()->route('races.show', [$tournament, $cup, $race]);
     }
 
     /**
@@ -41,12 +46,17 @@ class RaceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Race  $race
+     * @param  \App\Cup  $cup
      * @return \Illuminate\Http\Response
      */
-    public function show(Race $race)
+    public function show(Tournament $tournament, Cup $cup, Race $race)
     {
-        //
+        return view('races.show')
+            ->with('tournament', $tournament)
+            ->with('cup', $cup)
+            ->with('race', $race)
+            ->with('title_page', 'Torneo #'.$tournament->id.' - Copa #'.$cup->id.' - Carrera #'.$race->id)
+            ->with('menu_item', $this->menu_item);
     }
 
     /**

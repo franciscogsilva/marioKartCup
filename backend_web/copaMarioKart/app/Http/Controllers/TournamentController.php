@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cup;
 use App\Tournament;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
@@ -33,7 +35,12 @@ class TournamentController extends Controller
      */
     public function create()
     {
-        //
+        $tournament = new Tournament();
+        $tournament->status = 'Open';
+        $tournament->save();
+
+        return redirect()->route('tournaments.show', $tournament);  
+
     }
 
     /**
@@ -43,8 +50,7 @@ class TournamentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {      
     }
 
     /**
@@ -55,7 +61,10 @@ class TournamentController extends Controller
      */
     public function show(Tournament $tournament)
     {
-        //
+        return view('tournaments.show')
+            ->with('tournament', $tournament)
+            ->with('title_page', 'Torneo #'.$tournament->id)
+            ->with('menu_item', $this->menu_item);
     }
 
     /**

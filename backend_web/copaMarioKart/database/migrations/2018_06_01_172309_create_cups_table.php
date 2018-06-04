@@ -16,8 +16,10 @@ class CreateCupsTable extends Migration
         Schema::create('cups', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('status', ['Open', 'Closed'])->default('Open');
+
             $table->integer('tournament_id')->unsigned()->nullable();
             $table->foreign('tournament_id')->references('id')->on('tournaments');
+
             $table->timestamps();
         });
     }

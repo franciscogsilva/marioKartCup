@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participation extends Model
 {
-    protected $table = 'cups';
+    protected $table = 'participations';
     protected $fillable = [
         'position',
         'user_id',
