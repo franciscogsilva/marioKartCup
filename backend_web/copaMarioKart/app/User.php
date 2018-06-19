@@ -2,8 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\Tournament;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -29,5 +31,30 @@ class User extends Authenticatable
 
     public function participations(){
         return $this->hasMany('App\Participation');
+    }
+
+    public static function getUserByTournament(Tournament $tournament){
+        $users = User::whereHas('participations', function($participations) use($tournament){
+            $participations->whereHas('cup', function($cup) use($tournament){
+                $cup->where('tournament_id', $tournament->id);
+            });
+        })->get();
+
+        return $users;
+    }
+
+    public function getTotalPointsInTournament(Tournament $tournament){
+        
+        $participations = $this->participations()->whereHas('cup', function($cup) use($tournament){
+                $cup->where('tournament_id', $tournament->id);
+            })->get();
+        
+        $points =  0;
+
+        foreach ($participations as $par) {
+            $points = $points + $par->position->points;
+        }
+
+        return $points;
     }
 }

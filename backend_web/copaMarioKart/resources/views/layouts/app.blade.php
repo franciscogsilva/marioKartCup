@@ -39,7 +39,6 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li {{ $menu_item == 1 ? 'class=active' : '' }}><a href="{{ route('tournaments.index') }}">Torneos</a></li>
-                        <li {{ $menu_item == 2 ? 'class=active' : '' }}><a href="{{ route('users.index') }}">Usuarios</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

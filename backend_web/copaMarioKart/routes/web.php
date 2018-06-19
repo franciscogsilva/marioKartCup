@@ -30,9 +30,6 @@ Route::group(['middleware' => ['web','auth']], function () {
 	Route::get('participations/{participation}', 'ParticipationController@destroy')->name('participations.delete');
 
 	Route::get('races/{race}', 'RaceController@show')->name('races.show');
-
-	Route::resource('users', 'UserController', ['except' => ['delete']]);
-
 });
 
 // Authentication Routes...

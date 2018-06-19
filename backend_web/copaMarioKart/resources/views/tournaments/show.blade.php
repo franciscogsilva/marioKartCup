@@ -32,12 +32,12 @@
                                     <tr>
                                         <td>{{ $cup->id }}</td>
                                         <td>
-                                            <img src="{{ $cup->participations->sortBy('position')->first()->user->image }}" class="img-responsive img-circle img-karts" alt="Responsive image">
+                                            <img src="{{ $cup->participations->sortBy('position_id')->first()->user->image }}" class="factory-logo-fgs responsive-img circle materialboxed initialized" alt="Responsive image">
                                         </td>
                                         <td>
                                             <ul class="list-group">
-                                                @foreach($cup->participations->sortBy('position') as $participation)
-                                                    <li class="list-group-item {{ $participation->position=='1'?'list-group-item-success':'' }} {{ $participation->position=='2'?'list-group-item-info':'' }} {{ $participation->position=='3'?'list-group-item-warning':'' }}">#{{ $participation->position }} {{ $participation->user->name }}= {{ $participation->points }} Puntos</li>
+                                                @foreach($cup->participations->sortBy('position_id') as $participation)
+                                                    <li class="list-group-item {{ $participation->position->id=='1'?'list-group-item-success':'' }} {{ $participation->position->id=='2'?'list-group-item-info':'' }} {{ $participation->position->id=='3'?'list-group-item-warning':'' }}">#{{ $participation->position->id }} {{ $participation->user->name }}= {{ $participation->position->points }} Puntos</li>
                                                 @endforeach
                                             </ul>
                                         </td>

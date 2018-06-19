@@ -39,13 +39,13 @@
                                         @endif
                                     </thead>
                                     <tbody>
-                                        @foreach($cup->participations->sortBy('position') as $participation)
+                                        @foreach($cup->participations->sortBy('position_id') as $participation)
                                             <tr>
                                                 <td>
                                                     <div class="media">
                                                         <div class="media-left">
                                                             <a href="#">
-                                                                <img class="media-object img-circle img-karts" src="{{ asset($participation->user->image) }}">
+                                                                <img class="factory-logo-fgs responsive-img circle materialboxed initialized" src="{{ asset($participation->user->image) }}">
                                                             </a>
                                                         </div>
                                                         <div class="media-body">
@@ -57,7 +57,7 @@
                                                     <div class="media">
                                                         <div class="media-left">
                                                             <a href="#">
-                                                                <img class="media-object" src="{{ asset($participation->character->image) }}">
+                                                                <img class="factory-logo-fgs responsive-img circle materialboxed initialized" src="{{ asset($participation->character->image) }}">
                                                             </a>
                                                         </div>
                                                         <div class="media-body">
@@ -69,7 +69,7 @@
                                                     @if($cup->status=='Open')
                                                         <a href="{{ route('participations.delete', $participation) }}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
                                                     @else 
-                                                        {{ $participation->position }}/{{ $participation->points }}
+                                                        {{ $participation->position->id }}/{{ $participation->position->points }}
                                                     @endif
                                                 </td>
                                             </tr>

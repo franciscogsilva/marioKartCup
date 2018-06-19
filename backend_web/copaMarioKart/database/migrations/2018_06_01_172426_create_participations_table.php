@@ -15,8 +15,9 @@ class CreateParticipationsTable extends Migration
     {
         Schema::create('participations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('position')->nullable();
-            $table->integer('points')->nullable();
+
+            $table->integer('position_id')->unsigned()->nullable();
+            $table->foreign('position_id')->references('id')->on('positions');
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');

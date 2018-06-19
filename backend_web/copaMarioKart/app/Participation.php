@@ -13,6 +13,10 @@ class Participation extends Model
         'cup_id'
     ];
 
+    public function position(){
+        return $this->belongsTo('App\Position', 'position_id');
+    }
+
     public function user(){
         return $this->belongsTo('App\User');
     }

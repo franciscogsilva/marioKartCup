@@ -22,7 +22,7 @@ class TournamentController extends Controller
     {
         $tournaments = Tournament::orderBy('created_at', 'DESC')->paginate(30);
 
-        return view('tournaments.index')
+        return view('front.tournaments.index')
             ->with('tournaments', $tournaments)
             ->with('title_page', $this->title_page)
             ->with('menu_item', $this->menu_item);

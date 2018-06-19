@@ -37,7 +37,9 @@
                                         <td>
                                             <ul class="list-group">
                                                 @foreach($tournament->cups as $cup)
-                                                    {{ dd($cup->participations->groupBy('user_id')) }}
+                                                    @foreach($cup->participations as $participation)
+                                                        
+                                                    @endforeach
                                                 @endforeach
                                             </ul>
                                         </td>
